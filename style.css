@@ -1,0 +1,261 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+    background-image: url('glowing-pixel-heart.jpg');
+    background-size: 150px 100px;
+    animation: scrollBackground 1s linear infinite;
+    overflow: hidden; /* Prevent scrollbars */
+}
+  
+.volume-message {
+        position: fixed; /* Ensures it stays centered while scrolling */
+        top: 50%; /* Center vertically */
+        left: 50%; /* Center horizontally */
+        transform: translate(-50%, -50%);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%; /* Ensure it spans the full width */
+        max-width: 600px; /* Optional: Set a max width for a nice box size */
+        margin: auto auto; /* Center horizontally */
+        padding: 20px;
+        background: #222;
+        border: 4px solid #ff3e3e;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+.valentine-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 300px;
+    max-width: 80%;
+    padding: 20px;
+}
+  
+
+
+body {
+    background-image: url('glowing-pixel-heart.jpg');
+    background-size: 150px 100px;
+    animation: scrollBackground 1s linear infinite;
+}
+
+@keyframes scrollBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 100%;
+    }
+}
+
+.sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 0, 0, 0.8) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: glitterEffect 1s ease-out forwards;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 182, 193, 0.6);
+  }
+  
+  @keyframes glitterEffect {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.8;
+      background: radial-gradient(circle, rgba(255,255,0,1) 0%, rgba(255,0,255,0.8) 100%);
+      box-shadow: 0 0 10px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 0, 255, 0.6);
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  .heart {
+    position: absolute;
+    background: url('8-bit-crow-flying.gif') no-repeat center;
+    background-size: contain;
+    animation: floatUp 5s linear infinite;
+    opacity: 0;
+    bottom: 0;
+  }
+  
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(0.8);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-50vh) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-100vh) scale(0.6);
+      opacity: 0;
+    }
+  }
+
+
+  /*
+  Modal CSS
+  */
+
+  .start-button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    font-size: 14px;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background: #ff5e5e;
+    border: 4px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease, opacity 0.5s ease;
+    text-align: center;
+    opacity: 1;
+  }
+  
+  .start-button:hover {
+    background: #ff1e1e;
+    transform: scale(1.1);
+  }
+
+  .volume-message {
+    font-size: 16px;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background: #222;
+    padding: 10px 20px;
+    border: 4px solid #ff3e3e;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    margin: 20px auto;
+    width: fit-content;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  
+
+  /*
+  Quiz
+  */
+
+  .hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  
+  .valentine-question {
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background: #222;
+    padding: 20px;
+    border: 4px solid #ff69b4;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  
+  
+  .response-button {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 30px;
+    font-size: 14px;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background: #ff5e5e;
+    border: 4px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+  }
+  
+  .response-button:hover {
+    background: #ff1e1e;
+    transform: scale(1.1);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* image explosion */
+  #explosion-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through */
+    overflow: hidden;
+    z-index: 9999;
+  }
+  
+  .explosion {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url('mshrek.JPG') no-repeat center;
+    background-size: contain;
+    animation: explode 30s ease-out forwards;
+  }
+
+  @keyframes explode {
+    0% {
+      transform: scale(1.0) translate(0, 0);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(100.5) translate(200px, -200px);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(2) translate(400px, -400px);
+      opacity: 0;
+    }
+  }
+
+  /* date invitation */
+  .date-invitation {
+    position: fixed;
+    text-align: left;
+    left: 12px;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background: #222;
+    padding: 20px;
+    border: 4px solid #ff69b4;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <div id="explosion-container"></div>
+
+    <div id="volume-message" class="volume-message">
+        🔊 Turn up the volume for the best experience! 🔊
+        <button id="start-button" class="start-button">Click To Start</button>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="Take On Me (8 Bit Remix Cover Version) [Tribute to A-ha] - 8 Bit Universe.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="background-music-yes" loop>
+        <source src="imabeliever.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="no-sound">
+        <source src="wut-dee-hell.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="squidward-laugh">
+        <source src="squidward-laugh.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="spongebob-laugh">
+        <source src="spongebob-laugh.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="confusion-sound">
+        <source src="confusion-sound.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div id="valentine-question" class="valentine-question hidden">
+        <h2>💖 A$AP Chutney will you be my Valentine? 💖</h2>
+        <div class="button-container">
+            <button id="yes-button" class="response-button">Yes! 💘</button>
+            <button id="no-button" class="response-button">No... 🪳</button>
+        </div>
+    </div>
+
+    <div id="date-invitation" class="date-invitation hidden">
+        <h2>💖 Here's The Plan 💖</h2>
+        <p>Date: Sunday, 16-FEB-2025</p>
+        <p>Pickup Time: 4PM </p>
+        <p>Dress Code: Something Nice</p>
+        <p>Pickup Location: Your House</p>
+        <p>Destination: You'll Find Out</p>
+    </div>
+   
+
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = `${e.pageX}px`;
+            sparkle.style.top = `${e.pageY}px`;
+        
+            // Randomize sparkle color
+            const colors = [
+            'rgba(255, 0, 0, 1)',    // Red
+            'rgba(255, 255, 0, 1)',  // Yellow
+            'rgba(0, 255, 255, 1)',  // Cyan
+            'rgba(255, 0, 255, 1)',  // Magenta
+            'rgba(0, 255, 0, 1)'     // Green
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            sparkle.style.background = `radial-gradient(circle, rgba(255,255,255,1) 0%, ${randomColor} 100%)`;
+        
+            document.body.appendChild(sparkle);
+        
+            // Remove the sparkle after animation ends
+            setTimeout(() => sparkle.remove(), 1000);
+        });
+
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+            // Randomize position
+            heart.style.left = `${Math.random() * 100}vw`;
+            
+            // Randomize size
+            const size = Math.random() * 30 + 10;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+
+            document.body.appendChild(heart);
+
+            // Remove the heart after animation ends
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        // Generate hearts at intervals
+        setInterval(createFloatingHeart, 400); // Adjust timing for more/less frequent hearts
+
+        window.onload = () => {
+            const startButton = document.getElementById('start-button');
+            const volumeMessage = document.getElementById('volume-message');
+            const valentineQuestion = document.getElementById('valentine-question');
+            const music = document.getElementById('background-music');
+            const noSound = document.getElementById('no-sound');
+            const backgroundMusic = document.getElementById('background-music');
+            const noButton = document.getElementById('no-button');
+            const yesButton = document.getElementById('yes-button');
+            const squidwardLaugh = document.getElementById('squidward-laugh');
+            const spongebobLaugh = document.getElementById('spongebob-laugh');
+            const confusionSound = document.getElementById('confusion-sound');
+            const dateInvitation = document.getElementById('date-invitation');
+            const backgroundMusicYes = document.getElementById('background-music-yes');
+
+            let moveCount = 0; // Track how many times the button moves
+
+            startButton.addEventListener('click', () => {
+            // Play music
+            music.play();
+
+            // Fade out the message and button
+            volumeMessage.style.opacity = '0';
+            startButton.style.opacity = '0';
+
+            setTimeout(() => {
+                volumeMessage.style.display = 'none';
+                startButton.style.display = 'none';
+
+                // Show the valentine question
+                valentineQuestion.style.visibility = 'visible';
+                valentineQuestion.style.opacity = '1';
+            }, 500);
+            });
+
+            // Handle Yes and No responses
+            document.getElementById('yes-button').addEventListener('click', () => {
+
+                valentineQuestion.style.visibility = 'hidden';
+                yesButton.style.visibility = 'hidden';
+                noButton.style.visibility = 'hidden';
+                document.body.style.backgroundImage = "url('t&m.jpg')";
+                document.body.style.animation = 'none';
+                document.body.style.backgroundSize = 'cover'; // Make it fill the entire screen
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundRepeat = 'no-repeat';
+                backgroundMusic.pause(); // Pause background music
+                backgroundMusicYes.play();
+                
+
+                for (let i = 0; i < 20; i++) {
+                    createExplosion();
+                }
+
+                dateInvitation.style.visibility = 'visible';
+                dateInvitation.style.opacity = '1'
+            });
+
+            function createExplosion() {
+                const explosionContainer = document.getElementById('explosion-container');
+                const explosion = document.createElement('div');
+                explosion.classList.add('explosion');
+
+                // Randomize position and animation delay
+                explosion.style.left = `${Math.random() * 100}vw`;
+                explosion.style.top = `${Math.random() * 100}vh`;
+                explosion.style.animationDelay = `${Math.random() * 0.5}s`;
+
+                explosionContainer.appendChild(explosion);
+
+                // Remove explosion after animation ends
+                setTimeout(() => {
+                explosion.remove();
+                }, 1000);
+            }
+
+
+
+            noButton.addEventListener('mouseenter', () => {
+
+            moveCount++;
+
+            if (moveCount < 3) {
+                const randomX = Math.random() * 80; // Random position between 0% and 80% for X-axis
+                const randomY = Math.random() * 80; // Random position between 0% and 80% for Y-axis
+
+                noButton.style.position = 'absolute';
+                noButton.style.left = `${randomX}vw`;
+                noButton.style.top = `${randomY}vh`;
+            }
+
+            if (moveCount === 1) {
+                noButton.style.visibility = 'hidden'; // Hide the button
+                yesButton.style.visibility = 'hidden'; // Hide the button
+                noButton.textContent = 'Are you sure...?'
+                backgroundMusic.pause(); // Pause background music
+                squidwardLaugh.play(); // Play Squidward laugh sound
+            }
+
+            if (moveCount === 2) {
+                noButton.style.visibility = 'hidden'; // Hide the button
+                yesButton.style.visibility = 'hidden'; // Hide the button
+                 noButton.textContent = 'Chat, she trippin...'
+                backgroundMusic.pause(); // Pause background music
+                spongebobLaugh.play(); // Play SpongeBob laugh sound
+            }
+
+            if (moveCount === 3) {
+                noButton.style.visibility = 'hidden'; // Hide the button
+                yesButton.style.visibility = 'hidden'; // Hide the button
+                noButton.textContent = 'Ain\'t no way...'
+                backgroundMusic.pause(); // Pause background music
+                confusionSound.play(); // Play confusion sound
+            }
+
+            });
+
+            squidwardLaugh.addEventListener('ended', () => {
+                backgroundMusic.play(); // Resume background music
+                noButton.style.visibility = 'visible'; // Show the button
+                yesButton.style.visibility = 'visible'; // Show the button
+                
+            });
+
+            spongebobLaugh.addEventListener('ended', () => {
+                backgroundMusic.play(); // Resume background music
+                noButton.style.visibility = 'visible'; // Show the button
+                yesButton.style.visibility = 'visible'; // Show the button
+            });
+
+            confusionSound.addEventListener('ended', () => {
+                backgroundMusic.play(); // Resume background music
+                noButton.style.visibility = 'visible'; // Show the button
+                yesButton.style.visibility = 'visible'; // Show the button
+            });
+
+            noButton.addEventListener('click', () => {
+                backgroundMusic.pause(); // Pause background music
+                noButton.style.visibility = 'hidden'; // Show the button
+                yesButton.style.visibility = 'hidden';
+                valentineQuestion.style.visibility = 'hidden';
+                noSound.play(); // Play "wut dee hell" sound
+
+                Swal.fire({
+                    title: 'Bruhhhhhh....',
+                    text: 'Since you want to behave this way, this is who you will have to settle for.',
+                    imageUrl: 'mm_sharespace.jpg',
+                    imageWidth: 300,
+                    imageHeight: 300,
+                    imageAlt: 'ya-boi',
+                    confirmButtonText: 'Throwing Up & Vomitting',
+                });
+            });
+    };
+    </script>
+ 
+</body>
+</html>
